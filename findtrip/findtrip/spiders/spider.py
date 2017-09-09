@@ -4,7 +4,7 @@ from findtrip.items import FindtripItem
 class QuaSpider(scrapy.Spider):
     name = "Qua"
     start_urls = [
-        "http://www.qua.com/flights/PEK-XMN/2016-05-12?m=CNY&from=flight_home"
+       "https://flight.qunar.com/site/oneway_list.htm?searchDepartureAirport=PEK&searchArrivalAirport=PVG&searchDepartureTime=2017-09-10&searchArrivalTime=2017-09-13&nextNDays=0&startSearch=true&fromCode=BJS&toCode=PVG "
     ]
 
     def parse(self, response):

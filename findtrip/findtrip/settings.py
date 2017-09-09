@@ -26,7 +26,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'findtrip.pipelines.MongoDBPipeline': 300,
+#    'findtrip.pipelines.MongoDBPipeline': 300,
 }
 
 MONGODB_HOST = 'localhost' # Change in prod
@@ -40,7 +40,7 @@ MONGODB_PASSWORD = "" # Change in prod
 #USER_AGENT = 'findtrip (+http://www.yourdomain.com)'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS=32
+CONCURRENT_REQUESTS=4
 
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay

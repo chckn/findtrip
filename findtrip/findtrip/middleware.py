@@ -27,6 +27,8 @@ driver = webdriver.PhantomJS()
 class SeleniumMiddleware(object): 
     def process_request(self, request, spider):
         print spider.name
+        print request.url
+#        driver = webdriver.PhantomJS()
         if spider.name == 'Qua':
             try:
                 driver.get(request.url)
@@ -51,8 +53,9 @@ class SeleniumMiddleware(object):
         
         elif spider.name == 'Ctrip':
             driver.get(request.url)
-            driver.implicitly_wait(3)
+            driver.implicitly_wait(5)
             time.sleep(5)
+          
             '''
             # 携程网数据是瀑布流形式，通过控制滚轴向下来加载更多数据，但是爬取速度会变慢
             origin_page = driver.page_source
@@ -64,10 +67,27 @@ class SeleniumMiddleware(object):
                 js="var q=document.documentElement.scrollTop=5000"
                 driver.execute_script(js)
                 time.sleep(2) 
-                '''
-            
+                
+            '''
+
+            fligint_div = "//div[@id='J_flightlist2']/div"
+            nochange=0
+            listnum=0
+            while nochange<3:
+                lst=driver.find_elements_by_xpath(fligint_div)
+                if listnum==len(lst):
+                    nochange+=1
+                else:
+                    nochange=0
+                    listnum=len(lst)
+                    
+                try:
+                    driver.find_element_by_id("J_transit").click()   
+                except Exception:
+                    pass
+                time.sleep(3)
             page = driver.page_source # .decode('utf-8','ignore')
-            close_driver()
+#            close_driver()
 
             return HtmlResponse(request.url,body = page,encoding = 'utf-8',request = request,)
 
